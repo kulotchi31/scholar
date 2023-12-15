@@ -1,0 +1,92 @@
+/* style.css */
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background:linear-gradient(to bottom, #aeb7ee, #e994c5); /* Gradient background */
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    
+}
+
+.application-form {
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    width: 100%;
+    max-width: 500px;
+    padding: 30px;
+}
+
+.form-section {
+    display: none;
+}
+
+.application-form h2 {
+    margin-bottom: 20px;
+    text-align: center;
+    font-size: 24px;
+    color: #333;
+}
+
+.application-form input[type="text"],
+.application-form input[type="tel"],
+.application-form input[type="email"],
+.application-form select,
+.application-form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.application-form select {
+    appearance: none;
+    padding-right: 25px;
+    background: url('arrow-down.png') no-repeat right center;
+    background-size: 20px 20px;
+}
+
+.application-form textarea {
+    resize: vertical;
+    height: 100px;
+}
+
+.prev-btn,
+.next-btn,
+.submit-btn {
+    margin-top: 10px;
+    padding: 10px 15px;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.prev-btn {
+    float: left;
+}
+
+.next-btn {
+    float: right;
+}
+
+.submit-btn {
+    display: block;
+    margin: 20px auto 0;
+}
+
+.submit-btn:hover,
+.prev-btn:hover,
+.next-btn:hover {
+    background-color: #0056b3;
+}
