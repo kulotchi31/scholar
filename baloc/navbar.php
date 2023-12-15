@@ -81,6 +81,12 @@
 
 
 
+<li class="nav-item active" id="divider1">
+  <a class="nav-link" href="napplic.php">
+    <span><h4>Course</h4></span></a>
+</li>
+
+
 <!-- Nav Item - Utilities Collapse Menu -->
 
 
