@@ -100,6 +100,12 @@
 </li>
 
 
+<li class="nav-item active" id="divider1">
+  <a class="nav-link" href="university.php">
+    <span><h4>University</h4></span></a>
+</li>
+
+
 </ul>
 
  <!-- Content Wrapper -->

@@ -24,6 +24,10 @@ button{
     $sql = "SELECT * FROM students WHERE username = '".$_SESSION['username']."' AND password = '".$_SESSION['password']."'";
     $result = mysqli_query($con, $sql);
     $row = mysqli_fetch_assoc($result);
+    $birthdate = $row['birth'];
+    $currentDate = date("Y-m-d");
+
+    $age = date_diff(date_create($birthdate), date_create($currentDate));
     ?>
 
 <?php
@@ -104,7 +108,7 @@ if ($specificValue === 'updated') {
  <B>contact:</B> <?=$row['phone'];?>
 </B></td>
  <td>
-    <B>permanent Adress:</B> <?=$row['brgy'];?>,<br><?=$row['municipality'];?>,<br> <?=$row['province'];?>
+    <B>permanent Adress:</B> <?=$row['brgy'];?>
 </td>
 <td>
     
@@ -143,7 +147,7 @@ if ($specificValue === 'updated') {
     <td colspan=3>
     
  <center><B>Personal Information </B></center>
- <B>Age:</B> <?=$row['age'];?><br>
+ <B>Age:</B> <?php echo $age->format('%y');?><br>
  <B>Sex:</B> <?=$row['gender'];?><br>
  <B>Citizenship:</B> <?=$row['citizen'];?><br>
  <B>Civil Status:</B> <?=$row['civil_status'];?><br>

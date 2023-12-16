@@ -47,16 +47,18 @@ if (isset($_SESSION['username'], $_SESSION['password'])) {
 
     <!--START Adding Coursae Backend -->
     <?php
-    if (isset($_POST['addCourse'])) {
-        $course = $_POST['course'];
+    if (isset($_POST['addUniversity'])) {
+        $universityname = $_POST['uname'];
+        $universityaddress = $_POST['uaddress'];
+        $tpye = $_POST['utype'];
 
-        $sql = mysqli_query($con, "INSERT INTO course_tbl(Course)VALUES('$course')");
+        $sql = mysqli_query($con, "INSERT INTO university_tbl(university_name, university_address,type)VALUES('$universityname','$universityaddress','$tpye')");
 
         if ($sql) {
             echo '<script>
             Swal.fire({
                 title: "SUCCESS",
-                text: "YOU ADDED COURSE SUCCESFULY",
+                text: "YOU ADDED UNIVERSITY SUCCESFULY",
                 icon: "success"
               });</script>
             ';
@@ -71,7 +73,7 @@ if (isset($_SESSION['username'], $_SESSION['password'])) {
 
         <!-- Page Heading -->
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 text-gray-800">COURSE</h1>
+            <h1 class="h3 mb-0 text-gray-800">UNIVERSITY</h1>
             <!--<a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
        class="fas fa-download fa-sm text-white-50"></i> Generate Payroll</a> -->
         </div>
@@ -83,13 +85,15 @@ if (isset($_SESSION['username'], $_SESSION['password'])) {
                 
                 <div class="card-body">
 
-                    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#course">ADD COURSE</button>
+                    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#university">ADD University</button>
                     <br><br>
                     <table class="table table-bordered table-striped">
                         <thead>
                             <tr>
                                 <th>Id</th>
-                                <th>Course</th>
+                                <th>University Name</th>
+                                <th>University Address</th>
+                                <th>Type</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -98,19 +102,22 @@ if (isset($_SESSION['username'], $_SESSION['password'])) {
                         ?>
                         <tbody>
                             <?php
-                            $query = "SELECT * FROM course_tbl ORDER BY Course_ID ASC";
+                            $query = "SELECT * FROM university_tbl ORDER BY university_id ASC";
                             $query_run = mysqli_query($con, $query);
 
                             if (mysqli_num_rows($query_run) > 0) {
-                                foreach ($query_run as $course) {
+                                foreach ($query_run as $university) {
                             ?>
                                     <tr>
-                                        <td><?= $course['Course_ID']; ?></td>
-                                        <td><?= $course['Course']; ?></td>
+                                        <td><?= $university['university_id']; ?></td>
+                                        <td><?= $university['university_name']; ?></td>
+                                        <td><?= $university['university_address']; ?></td>
+                                        <td><?= $university['type']; ?></td>
+
 
                                         <td>
-                                            <form method="POST">
-                                                <a href="view_course.php?id=<?= $course['Course_ID']; ?>" class="btn btn-info btn-sm comfirm-delete">View</a>
+                                            <form action="course.php" method="POST">
+                                                <a href="view_university.php?id=<?= $university['university_id']; ?>" class="btn btn-info btn-sm comfirm-delete">View</a>
                                                 
                                             </form>
 
@@ -137,7 +144,7 @@ if (isset($_SESSION['username'], $_SESSION['password'])) {
         <!-- Content Row -->
 
         <!-- START ADD COURSE Modal -->
-<div class="modal fade" id="course" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="university" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -149,15 +156,27 @@ if (isset($_SESSION['username'], $_SESSION['password'])) {
             <div class="modal-body">
                 <form method="POST">
                     <div class="form-group">
-                        <label for="course" class="col-form-label">COURSE:</label>
-                        <input type="text" name="course" class="form-control" id="course">
+                        <label for="uname" class="col-form-label">University Name:</label>
+                        <input type="text" name="uname" class="form-control" id="uname">
+                    </div>
+                    <div class="form-group">
+                        <label for="uaddress" class="col-form-label">University Address:</label>
+                        <input type="text" name="uaddress" class="form-control" id="uaddress">
+                    </div>
+                    <div class="form-group">
+                        <label for="utype" class="col-form-label">University Type:</label>
+                        <select name="utype" id="utype" class="form-control">
+                            <option value="" hidden>Select Type</option>
+                            <option value="public">Public</option>
+                            <option value="private">Private</option>
+                        </select>
                     </div>
 
 
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary" name="addCourse">ADD</button>
+                <button type="submit" class="btn btn-primary" name="addUniversity">ADD</button>
                 </form>
             </div>
         </div>

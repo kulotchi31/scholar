@@ -264,6 +264,11 @@ if(isset($_POST['scholar'])){
     $sql = "SELECT * FROM students WHERE username = '".$_SESSION['username']."' AND password = '".$_SESSION['password']."'";
     $result = mysqli_query($con, $sql);
     $row = mysqli_fetch_assoc($result);
+    $birthdate = $row['birth'];
+    $currentDate = date("Y-m-d");
+
+    $age = date_diff(date_create($birthdate), date_create($currentDate));
+    
     ?>
 
     <div class="container d-flex justify-content-center">
@@ -309,7 +314,7 @@ if(isset($_POST['scholar'])){
                                     <div class="mb-3 last" id="name2" >
                                         <label>Age</label>
                                         <p>
-                                        <input type="text" class="form-control" name="age" value="<?php echo $row['age'] ?>">
+                                        <input type="text" class="form-control" name="age" value="<?php echo $age->format('%y'); ?>">
                                         </p>
                                     </div>
                                     
