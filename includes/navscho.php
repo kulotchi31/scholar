@@ -137,6 +137,12 @@ if(!empty($update_image)){
 
 
 
+<li class="nav-item active" id="divider2">
+  <a class="nav-link" href="disability.php">
+    <span><h4>Disability</h4></span></a>
+</li>
+
+
 <!-- Nav Item - Utilities Collapse Menu -->
 
 

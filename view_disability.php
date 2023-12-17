@@ -17,7 +17,7 @@ $id = $_GET["id"];
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
     
 
-    <title>University View</title>
+    <title>Disability View</title>
 </head>
 <style>
     #studview {
@@ -79,16 +79,15 @@ $id = $_GET["id"];
 <?php
 //  Update Course 
 if (isset($_POST['update'])) {
-    $university_id = $_GET['id'];
-    $uname = $_POST['uname'];
-    $uaddress = $_POST['uaddress'];
-    $utype = $_POST['utype'];
-    $sql = mysqli_query($con, "UPDATE university_tbl SET university_name = '$uname',university_address = '$uaddress' ,type = '$utype' WHERE university_id = '$university_id'");
+    $disability_id = $_GET['id'];
+    $disability = $_POST['disability'];
+
+    $sql = mysqli_query($con, "UPDATE disability_tbl SET type_of_disability = '$disability' WHERE disability_id = '$disability_id'");
     if ($sql) {
         echo '<script>
         Swal.fire({
             title: "SUCCESS",
-            text: "YOU UPDATED UNIVERSITY SUCCESFULY",
+            text: "YOU UPDATED DISABILITY SUCCESFULY",
             icon: "success"
           });</script>
         ';
@@ -97,19 +96,19 @@ if (isset($_POST['update'])) {
 
 //Delete Course
 if (isset($_POST['delete'])) {
-    $uId = $_GET['id'];
+    $disabilityid = $_GET['id'];
 
-    $sql = mysqli_query($con, "DELETE FROM university_tbl WHERE university_id = '$uId'");
+    $sql = mysqli_query($con, "DELETE FROM disability_tbl WHERE disability_id = '$disabilityid'");
     if ($sql) {
         echo "<script>
         Swal.fire({
             title: 'SUCCESS',
-            text: 'YOU DELETED UNIVERSITY SUCCESFULY',
+            text: 'YOU DELETED DISABILITY SUCCESFULY',
             icon: 'success',
             buttons: {
                 confirm : {text:'Ok',className:'sweet-warning'}}
         }).then(function() {
-            window.location = 'university.php';
+            window.location = 'disability.php';
             });
           </script></script>
         ";
@@ -133,42 +132,21 @@ if (isset($_POST['delete'])) {
 
                             <?php
                             if (isset($_GET['id'])) {
-                                $uId = mysqli_real_escape_string($con, $_GET['id']);
-                                $query = "SELECT * FROM university_tbl WHERE university_id='$uId' ";
+                                $disabilityid = mysqli_real_escape_string($con, $_GET['id']);
+                                $query = "SELECT * FROM disability_tbl WHERE disability_id='$disabilityid' ";
                                 $query_run = mysqli_query($con, $query);
 
                                 if (mysqli_num_rows($query_run) > 0) {
-                                    $university = mysqli_fetch_array($query_run);
+                                    $disability = mysqli_fetch_array($query_run);
                             ?>
-                                    <a href="university.php" class="btn btn-danger float-end">BACK</a>
-                                    <h4 style="text-align: center;">University</h4>
+                                    <a href="course.php" class="btn btn-danger float-end">BACK</a>
+                                    <h4 style="text-align: center;">DISABILITY</h4>
+
+
                                     <div class="mb-3">
-                                    <h5 style="text-align: left;"><label>Unviersity Name</label>
-                                        <input type="text" name="uname" class="form-control" value="<?= $university['university_name'] ?>">
-                                    </div>
-                                    <div class="mb-3">
-                                    <h5 style="text-align: left;"><label>Unviersity Address</label>
-                                        <input type="text" name="uaddress" class="form-control" value="<?= $university['university_address'] ?>">
-                                    </div>
-                                    <div class="mb-3">
-                                    <h5 style="text-align: left;"><label>Type</label>
-                                    <select name="utype" id=""class="form-control">
-                                    <?php 
-                                    if($university['type'] == "public"){
-                                        echo '
-                                            <option value="public">Public</option>
-                                            <option value="private">Private</option>
-                                        ';
-                                    }else{
-                                        echo '
-                                            <option value="private">Private</option>
-                                            <option value="public">Public</option>
-                                        ';
-                                    }
-                                    
-                                    ?>
-                                    </select>
-                                        
+                                        <br>
+
+                                        <input type="text" name="disability" class="form-control" value="<?= $disability['type_of_disability'] ?>">
                                     </div>
 
 
@@ -176,7 +154,7 @@ if (isset($_POST['delete'])) {
 
                     <div class="button">
                         <button type="submit" class="btn btn-primary" name="update">Update</button>
-                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteUniversity">Delete</button>
+                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteDisability">Delete</button>
                     </div>
                     </form>
 
@@ -197,7 +175,7 @@ if (isset($_POST['delete'])) {
 
 
 <!-- Modal -->
-<div class="modal fade" id="deleteUniversity" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div class="modal fade" id="deleteDisability" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog modal-sm modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
@@ -207,7 +185,7 @@ if (isset($_POST['delete'])) {
       </div>
       <form action="" method="POST">
       <div class="modal-body">
-        Dou you want to delete this University?
+        Dou you want to delete this DISABILITY?
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>

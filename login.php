@@ -21,6 +21,7 @@
 
       $_SESSION['username'] = $row['username'];
       $_SESSION['password'] = $row['password'];
+      $_SESSION['scholarid'] = $row['id'];
 
       header("location:homescho.php");
       exit;
@@ -53,6 +54,7 @@
 
       $_SESSION['username'] = $row['username'];
       $_SESSION['password'] = $row['password'];
+      $_SESSION['scholarid'] = $row['id'];
 
       header("location:home.php");
       exit;
