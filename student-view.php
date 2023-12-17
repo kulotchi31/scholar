@@ -127,22 +127,13 @@ $select = "UPDATE students SET status = 'scholars' WHERE id = '$id' ";
     <div class="email">
            <?php echo $row['email'] ?>
 </div>
-          <div class="col">
-            <label class="form-label">Username:</label>
-            <input type="text" class="form-control" name="username"  value="<?php echo $row['email'] ?>">
-          </div>
-
-          <div class="col">
-            <label class="form-label">Password:</label>
-            <input type="text" class="form-control" name="password" id="inputField2" value="<?php echo $row['password'] ?>" readonly>
-          </div>
-        </div>
+          
 
         
 
         <div class="col">
             <label class="form-label">Scholar ID:</label>
-            <input type="text" class="form-control" name="scholar_id"id="inputField1" value="<?php echo $row['scholar_id'] ?>">
+            <input type="text" class="form-control" name="scholar_id"id="inputField1" value="SD-<?php echo $row['id'] ?>">
           </div>
         </div>
 

@@ -150,7 +150,7 @@ $select = "UPDATE students SET status = 'pending' WHERE id = '$id' ";
                             ?>
                             <tbody>
                                 <?php 
-                                    $query = "SELECT * FROM students WHERE status = 'scholars' ORDER BY id ASC";
+                                    $query = "SELECT students.*,course_tbl.*,university_tbl.* FROM students join course_tbl on fk_course_id=Course_ID join university_tbl on fk_university_id=university_id WHERE status = 'scholars' ORDER BY id ASC";
                                     $query_run = mysqli_query($con, $query);
 
                                     if(mysqli_num_rows($query_run) > 0)
@@ -159,11 +159,11 @@ $select = "UPDATE students SET status = 'pending' WHERE id = '$id' ";
                                         {
                                             ?>
                                             <tr>
-                                            <td><?= $student['scholar_id']; ?></td>
+                                            <td>SD-<?= $student['id']; ?></td>
                                                 <td><?= $student['lname'], ', ' ,$student['fname'],', ',$student['mname'], '.'?></td>
                                                 <td><?= $student['birth']; ?></td>
-                                                <td><?= $student['school']; ?></td>
-                                                <td><?= $student['course']; ?></td>
+                                                <td><?= $student['university_name']; ?></td>
+                                                <td><?= $student['Course']; ?></td>
                                                 <td><?= $student['brgy']; ?></td>
                                                 <td>
                                         

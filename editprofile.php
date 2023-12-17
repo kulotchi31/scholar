@@ -177,7 +177,6 @@ if (isset($_POST["submit"])) {
 
   $yearlevel = $_POST['yearlevel'];
   $course = $_POST['course'];
-  $age = $_POST['age'];
   $genaverage = $_POST['genaverage'];
   $civil_status = $_POST['civil_status'];
   $gender = $_POST['gender'];
@@ -201,7 +200,7 @@ if (isset($_POST["submit"])) {
 
 
 
-  $sql = "UPDATE `students` SET `fname`='$fname',`mname`='$mname',`lname`='$lname',`birth`='$birth',`phone`='$phone',`school`='$school',`citizen`='$citizen',`placeofbirth`='$placeofbirth',`schooladdr`='$schooladdr',`email`='$email',`yearlevel`='$yearlevel',`course`='$course',`age`='$age',`genaverage`='$genaverage',`civil_status`='$civil_status',`gender`='$gender',`school_type`='$school_type',`fathername`='$fathername',`mothername`='$mothername',`motheraddress`='$motheraddress',`fatheraddress`='$fatheraddress',`fatheroccup`='$fatheroccup',`motheroccup`='$motheroccup',`fathereducattain`='$fathereducattain',`mothereducattain`='$mothereducattain',`gross`='$gross',`sibling`='$sibling',`fatherstat`='$fatherstat',`motherstat`='$motherstat',`intend`='$intend',`brgy`='$brgy' WHERE username = '" . $_SESSION['username'] . "' AND password = '" . $_SESSION['password'] . "'";
+  $sql = "UPDATE `students` SET `fname`='$fname',`mname`='$mname',`lname`='$lname',`birth`='$birth',`phone`='$phone',`school`='$school',`citizen`='$citizen',`placeofbirth`='$placeofbirth',`schooladdr`='$schooladdr',`email`='$email',`yearlevel`='$yearlevel',`course`='$course',`genaverage`='$genaverage',`civil_status`='$civil_status',`gender`='$gender',`school_type`='$school_type',`fathername`='$fathername',`mothername`='$mothername',`motheraddress`='$motheraddress',`fatheraddress`='$fatheraddress',`fatheroccup`='$fatheroccup',`motheroccup`='$motheroccup',`fathereducattain`='$fathereducattain',`mothereducattain`='$mothereducattain',`gross`='$gross',`sibling`='$sibling',`fatherstat`='$fatherstat',`motherstat`='$motherstat',`intend`='$intend',`brgy`='$brgy' WHERE username = '" . $_SESSION['username'] . "' AND password = '" . $_SESSION['password'] . "'";
 
   $result = mysqli_query($con, $sql);
 
@@ -325,12 +324,6 @@ if (isset($_POST['scholar'])) {
                     </p>
                   </div>
 
-                  <div class="mb-3 last" id="name2">
-                    <label>Age</label>
-                    <p>
-                      <input type="text" class="form-control" name="age" value="<?php echo $age->format('%y'); ?>">
-                    </p>
-                  </div>
 
 
 
@@ -421,20 +414,58 @@ if (isset($_POST['scholar'])) {
                 <div class="row mb-3" id="con2">
 
 
-                  <div class="mb-3 last" id="name2">
-                    <label>School Name</label>
+                  <?php
+$sql = "SELECT * FROM university_tbl";
+$result = $con->query($sql);
 
-                    <p>
-                      <input type="text" class="form-control" name="school" value="<?php echo $row['school'] ?>">
-                    </p>
-                  </div>
-                  <div class="mb-3 last" id="name2">
-                    <label>School Address</label>
+$sql2 = "SELECT * FROM course_tbl";
+$result2 = $con->query($sql2);
 
-                    <p>
-                      <input type="text" class="form-control" name="schooladdr" value="<?php echo $row['schooladdr'] ?>">
-                    </p>
+
+// Check if the query was successful
+
+
+?>
+  
+
+
+                   
+                   
+                </select>
+
+
+
+
+                  <div class="mb-3 last" id="name2">
+                     <select id="id" name="school" required>
+<option value="" disabled selected>School Name</option>
+
+                  
+                    <?php
+
+                    if ($result) {
+
+            // Loop through the results and output each name as an option
+            while ($row1 = $result->fetch_assoc()) {
+                if($row1["university_id"]==$row["fk_university_id"]){
+
+                   echo "<option selected value='" . $row['university_id'] . "'>" . $row['university_name'] . "</option>";
+                }
+                else
+                {
+
+                    echo "<option  value='" . $row['university_id'] . "'>" . $row['university_name'] . "</option>";
+                }
+               
+            }
+        }
+            ?>
+
+
+                   
+                   
                   </div>
+             
                   <div class="mb-3 last" id="name2">
                     <label>School Intended to Enroll In</label>
 
@@ -446,7 +477,7 @@ if (isset($_POST['scholar'])) {
                     <label>Course</label>
 
                     <p>
-                      <input type="text" class="form-control" name="course" value="<?php echo $row['course'] ?>">
+                      <input type="text" class="form-control" name="course" value="<?php echo $row['Course'] ?>">
                     </p>
                   </div>
                   <div class="mb-3 last" id="name2">

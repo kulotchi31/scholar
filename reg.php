@@ -321,6 +321,11 @@ if(isset($_POST['submit'])){
    $suffix = mysqli_real_escape_string($con, $_POST['suffix']);
    $birth = mysqli_real_escape_string($con, $_POST['birth']);
 
+   $username=  mysqli_real_escape_string($con, $_POST['username']);
+
+   $password = mysqli_real_escape_string($con, $_POST['password']);
+
+
 
 
     $phone = mysqli_real_escape_string($con, $_POST['phone']);
@@ -401,7 +406,7 @@ if(isset($_POST['submit'])){
 
 
 
-        $query = "INSERT INTO students (fname,mname,lname,birth,suffix,citizen,placeofbirth,phone,fk_university_id,email,yearlevel,fk_course_id,genaverage,civil_status,gender,intend,brgy,brgclear_img,moral_img,status) VALUES('$fname','$mname','$lname','$birth','$suffix','$citizen','$placeofbirth','$phone','$school','$email','$yearlevel','$course','$genaverage','$civil_status','$gender','$intend','$brgy','$brgclear_img','$moral_img','Applicants') ";
+        $query = "INSERT INTO students (fname,mname,lname,birth,suffix,citizen,placeofbirth,phone,fk_university_id,email,yearlevel,fk_course_id,genaverage,civil_status,gender,intend,brgy,brgclear_img,moral_img,username,password,status) VALUES('$fname','$mname','$lname','$birth','$suffix','$citizen','$placeofbirth','$phone','$school','$email','$yearlevel','$course','$genaverage','$civil_status','$gender','$intend','$brgy','$brgclear_img','$moral_img','$username','$password','Applicants') ";
          $query_run = mysqli_query($con, $query);
          if($query_run){
           // move_uploaded_file($image_tmp_name5, $image_folder5,);
@@ -469,7 +474,12 @@ if(isset($_POST['submit'])){
 <!-- <label> Lastname: </label>   -->
 <input id="fullname" type="text" name="lname" placeholder="Last Name"  required/> 
 <input id="fullname" type="text" name="suffix" placeholder="Suffix"  /> 
+
+<!-- <label> Lastname: </label>   -->
+<input id="fullname" type="text" name="username" placeholder="Username"  required/> 
+<input id="fullname" type="password" name="password" placeholder="Password"  /> 
 </div>
+
 
 
 <!-- <div class="year"> 

@@ -142,7 +142,7 @@ $select = "UPDATE students SET status = 'rejected' WHERE id = '$id' ";
                         if(isset($_GET['id']))
                         {
                             $student_id = mysqli_real_escape_string($con, $_GET['id']);
-                            $query = "SELECT * FROM students WHERE id='$student_id' ";
+                            $query = "SELECT students.*,course_tbl.*,university_tbl.* FROM students join course_tbl on fk_course_id=Course_ID join university_tbl on fk_university_id=university_id WHERE students.id = '$student_id' ORDER BY id ASC";
                             $query_run = mysqli_query($con, $query);
 
                             if(mysqli_num_rows($query_run) > 0)
@@ -212,24 +212,25 @@ $select = "UPDATE students SET status = 'rejected' WHERE id = '$id' ";
                                         </p>
                                     </div>
 
-                                    <div class="mb-3">
+                                       <div class="mb-3">
                                         <h5><label>Permanent Address</Address></label>
                                         <p class="form-control">
-                                        <strong><?=$student['brgy'], ', ' ,$student['municipality'],', ',$student['province'], '.'?>
+                                        <strong><?=$student['brgy']?> , Sto Domingo ,  Nueva Ecija
                                         </p>
                                     </div>
+
 
                                     <div class="mb-3">
                                         <h5><label>School Name</label>
                                         <p class="form-control">
-                                        <strong> <?=$student['school'];?>
+                                        <strong> <?=$student['university_name'];?>
                                         </p>
                                     </div>
 
                                     <div class="mb-3">
                                         <h5><label>School Address</label>
                                         <p class="form-control">
-                                        <strong> <?=$student['schooladdr'];?>
+                                        <strong> <?=$student['university_address'];?>
                                         </p>
                                     </div>
 
@@ -250,7 +251,7 @@ $select = "UPDATE students SET status = 'rejected' WHERE id = '$id' ";
                                     <div class="mb-3">
                                         <h5><label>Course</label>
                                         <p class="form-control">
-                                        <strong> <?=$student['course'];?>
+                                        <strong> <?=$student['Course'];?>
                                         </p>
                                     </div>
 
@@ -278,7 +279,7 @@ $select = "UPDATE students SET status = 'rejected' WHERE id = '$id' ";
                                     <div class="mb-3">
                                         <h5><label>School Type</label>
                                         <p class="form-control">
-                                        <strong><?=$student['school_type'];?>
+                                        <strong><?=$student['type'];?>
                                         </p>
                                     </div>
 

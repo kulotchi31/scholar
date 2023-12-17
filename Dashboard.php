@@ -1,4 +1,4 @@
-<?php
+r<?php
 require('top.inc.php');
 ?>
 <div class="content pb-0">
