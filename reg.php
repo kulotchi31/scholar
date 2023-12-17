@@ -52,13 +52,14 @@ hr {
 }
 .year{
     margin-top: 0px;
+
     
 
 }
 #year1{
     margin-top: 0px;
     margin-bottom: 0px;
-    width:47%;
+    width:100%;
     text-transform: capitalize;
     
 }
@@ -279,96 +280,103 @@ if(isset($_POST['submit'])){
   $inputValue2 = $_POST["lname"];
   $inputValue3 = $_POST["citizen"];
   $inputValue4 = $_POST["placeofbirth"];
-  $inputValue5 = $_POST["school"];
-  $inputValue6 = $_POST["schooladdr"];
-  $inputValue7 = $_POST["fathername"];
-  $inputValue8 = $_POST["mothername"];
-  $inputValue9 = $_POST["fatheraddress"];
-  $inputValue10 = $_POST["motheraddress"];
-  $inputValue11 = $_POST["fatheroccup"];
-  $inputValue12 = $_POST["motheroccup"];
-  $inputValue13 = $_POST["fathereducattain"];
-  $inputValue14 = $_POST["mothereducattain"];
+   $inputValue5 = $_POST["suffix"];
+  // $inputValue5 = $_POST["school"];
+  // $inputValue6 = $_POST["schooladdr"];
+  // $inputValue7 = $_POST["fathername"];
+  // $inputValue8 = $_POST["mothername"];
+  // $inputValue9 = $_POST["fatheraddress"];
+  // $inputValue10 = $_POST["motheraddress"];
+  // $inputValue11 = $_POST["fatheroccup"];
+  // $inputValue12 = $_POST["motheroccup"];
+  // $inputValue13 = $_POST["fathereducattain"];
+  // $inputValue14 = $_POST["mothereducattain"];
   $inputValue15 = $_POST["intend"];
   $inputValue16 = $_POST["brgy"];
-  $inputValue17 = $_POST["municipality"];
-  $inputValue18 = $_POST["province"];
+
     // Capitaize the inpu6
     $capitalizedInput = ucwords(strtolower($inputValue));
     $capitalizedInput1 = ucwords(strtolower($inputValue1));
     $capitalizedInput2 = ucwords(strtolower($inputValue2));
     $capitalizedInput3 = ucwords(strtolower($inputValue3));
     $capitalizedInput4 = ucwords(strtolower($inputValue4));
-    $capitalizedInput5 = ucwords(strtolower($inputValue5));
-    $capitalizedInput6 = ucwords(strtolower($inputValue6));
-    $capitalizedInput7 = ucwords(strtolower($inputValue7));
-    $capitalizedInput8 = ucwords(strtolower($inputValue8));
-    $capitalizedInput9 = ucwords(strtolower($inputValue9));
-    $capitalizedInput10 = ucwords(strtolower($inputValue10));
-    $capitalizedInput11 = ucwords(strtolower($inputValue11));
-    $capitalizedInput12 = ucwords(strtolower($inputValue12));
-    $capitalizedInput13 = ucwords(strtolower($inputValue13));
-    $capitalizedInput14 = ucwords(strtolower($inputValue14));
+     $capitalizedInput5 = ucwords(strtolower($inputValue5));
+    // $capitalizedInput5 = ucwords(strtolower($inputValue5));
+    // $capitalizedInput6 = ucwords(strtolower($inputValue6));
+    // $capitalizedInput7 = ucwords(strtolower($inputValue7));
+    // $capitalizedInput8 = ucwords(strtolower($inputValue8));
+    // $capitalizedInput9 = ucwords(strtolower($inputValue9));
+    // $capitalizedInput10 = ucwords(strtolower($inputValue10));
+    // $capitalizedInput11 = ucwords(strtolower($inputValue11));
+    // $capitalizedInput12 = ucwords(strtolower($inputValue12));
+    // $capitalizedInput13 = ucwords(strtolower($inputValue13));
+    // $capitalizedInput14 = ucwords(strtolower($inputValue14));
     $capitalizedInput15 = ucwords(strtolower($inputValue15));
     $capitalizedInput16 = ucwords(strtolower($inputValue16));
-    $capitalizedInput17 = ucwords(strtolower($inputValue17));
-    $capitalizedInput18 = ucwords(strtolower($inputValue18));
+
 
    $fname = mysqli_real_escape_string($con, $_POST['fname']);
    $mname = mysqli_real_escape_string($con, $_POST['mname']);
    $lname = mysqli_real_escape_string($con, $_POST['lname']);
+   $suffix = mysqli_real_escape_string($con, $_POST['suffix']);
    $birth = mysqli_real_escape_string($con, $_POST['birth']);
+
+
+
     $phone = mysqli_real_escape_string($con, $_POST['phone']);
     $school = mysqli_real_escape_string($con, $_POST['school']);
     $citizen = mysqli_real_escape_string($con, $_POST['citizen']);
     $placeofbirth = mysqli_real_escape_string($con, $_POST['placeofbirth']);
-    $schooladdr = mysqli_real_escape_string($con, $_POST['schooladdr']);
+
+
     $email = mysqli_real_escape_string($con, $_POST['email']);
     $yearlevel = mysqli_real_escape_string($con, $_POST['yearlevel']);
     $course = mysqli_real_escape_string($con, $_POST['course']);
-    $age = mysqli_real_escape_string($con, $_POST['age']);
+ 
     $genaverage = mysqli_real_escape_string($con, $_POST['genaverage']);
     $civil_status = mysqli_real_escape_string($con, $_POST['civil_status']);
     $gender = mysqli_real_escape_string($con, $_POST['gender']);
-    $school_type = mysqli_real_escape_string($con, $_POST['school_type']);
-    $fatheraddress = mysqli_real_escape_string($con, $_POST['fatheraddress']);
-    $fathername = mysqli_real_escape_string($con, $_POST['fathername']);
-    $mothername = mysqli_real_escape_string($con, $_POST['mothername']);
-    $motheraddress = mysqli_real_escape_string($con, $_POST['motheraddress']);
-    $fatheroccup = mysqli_real_escape_string($con, $_POST['fatheroccup']);
-    $motheroccup = mysqli_real_escape_string($con, $_POST['motheroccup']);
-    $fathereducattain = mysqli_real_escape_string($con, $_POST['fathereducattain']);
-    $mothereducattain = mysqli_real_escape_string($con, $_POST['mothereducattain']);
-    $gross = mysqli_real_escape_string($con, $_POST['gross']);
-    $sibling = mysqli_real_escape_string($con, $_POST['sibling']);
-    $fatherstat = mysqli_real_escape_string($con, $_POST['fatherstat']);
-    $motherstat = mysqli_real_escape_string($con, $_POST['motherstat']);
+    // $fatheraddress = mysqli_real_escape_string($con, $_POST['fatheraddress']);
+    // $fathername = mysqli_real_escape_string($con, $_POST['fathername']);
+    // $mothername = mysqli_real_escape_string($con, $_POST['mothername']);
+    // $motheraddress = mysqli_real_escape_string($con, $_POST['motheraddress']);
+    // $fatheroccup = mysqli_real_escape_string($con, $_POST['fatheroccup']);
+    // $motheroccup = mysqli_real_escape_string($con, $_POST['motheroccup']);
+    // $fathereducattain = mysqli_real_escape_string($con, $_POST['fathereducattain']);
+    // $mothereducattain = mysqli_real_escape_string($con, $_POST['mothereducattain']);
+    // $gross = mysqli_real_escape_string($con, $_POST['gross']);
+    // $sibling = mysqli_real_escape_string($con, $_POST['sibling']);
+
+    // $fatherstat = mysqli_real_escape_string($con, $_POST['fatherstat']);
+    // $motherstat = mysqli_real_escape_string($con, $_POST['motherstat']);
+
     $intend = mysqli_real_escape_string($con, $_POST['intend']);
     $brgy = mysqli_real_escape_string($con, $_POST['brgy']);
-    $municipality = mysqli_real_escape_string($con, $_POST['municipality']);
-    $province = mysqli_real_escape_string($con, $_POST['province']);
-    $disability = mysqli_real_escape_string($con, $_POST['disability']);
+
+    // $municipality = mysqli_real_escape_string($con, $_POST['municipality']);
+    // $province = mysqli_real_escape_string($con, $_POST['province']);
+    // $disability = mysqli_real_escape_string($con, $_POST['disability']);
     
 
-   $tax_img = $_FILES['tax_img']['name'];
-   $image_size = $_FILES['tax_img']['size'];
-   $image_tmp_name5 = $_FILES['tax_img']['tmp_name'];
-   $image_folder5 = 'upload/'.$tax_img;
+   // $tax_img = $_FILES['tax_img']['name'];
+   // $image_size = $_FILES['tax_img']['size'];
+   // $image_tmp_name5 = $_FILES['tax_img']['tmp_name'];
+   // $image_folder5 = 'upload/'.$tax_img;
 
-   $cor_img = $_FILES['cor_img']['name'];
-   $image_size = $_FILES['cor_img']['size'];
-   $image_tmp_name4 = $_FILES['cor_img']['tmp_name'];
-   $image_folder4 = 'upload/'.$cor_img;
+   // $cor_img = $_FILES['cor_img']['name'];
+   // $image_size = $_FILES['cor_img']['size'];
+   // $image_tmp_name4 = $_FILES['cor_img']['tmp_name'];
+   // $image_folder4 = 'upload/'.$cor_img;
 
-   $cog_img = $_FILES['cog_img']['name'];
-   $image_size = $_FILES['cog_img']['size'];
-   $image_tmp_name3 = $_FILES['cog_img']['tmp_name'];
-   $image_folder3 = 'upload/'.$cog_img;
+   // $cog_img = $_FILES['cog_img']['name'];
+   // $image_size = $_FILES['cog_img']['size'];
+   // $image_tmp_name3 = $_FILES['cog_img']['tmp_name'];
+   // $image_folder3 = 'upload/'.$cog_img;
 
-   $report_img = $_FILES['report_img']['name'];
-   $image_size = $_FILES['report_img']['size'];
-   $image_tmp_name2 = $_FILES['report_img']['tmp_name'];
-   $image_folder2 = 'upload/'.$report_img;
+   // $report_img = $_FILES['report_img']['name'];
+   // $image_size = $_FILES['report_img']['size'];
+   // $image_tmp_name2 = $_FILES['report_img']['tmp_name'];
+   // $image_folder2 = 'upload/'.$report_img;
 
    $brgclear_img = $_FILES['brgclear_img']['name'];
    $image_size = $_FILES['brgclear_img']['size'];
@@ -389,13 +397,17 @@ if(isset($_POST['submit'])){
          $message[] = '
          Our Scholarship Program Does Not Accept Duplicate Data!';
       }else{
-        $query = "INSERT INTO students (fname,mname,lname,birth,citizen,placeofbirth,phone,school,schooladdr,email,disability,yearlevel,course,age,genaverage,civil_status,gender,school_type,fathername,mothername,fatheraddress,motheraddress,fatheroccup,motheroccup,fathereducattain,mothereducattain,gross,sibling,fatherstat,motherstat,intend,brgy,municipality,province,tax_img,cor_img,cog_img,report_img,brgclear_img,moral_img,status,scholar_id) VALUES('$capitalizedInput','$capitalizedInput1','$capitalizedInput2','$birth','$capitalizedInput3','$capitalizedInput4','$phone','$capitalizedInput5','$capitalizedInput6','$email','$disability','$yearlevel','$course','$age','$genaverage','$civil_status','$gender','$school_type','$capitalizedInput7','$capitalizedInput8','$capitalizedInput9','$capitalizedInput10','$capitalizedInput11','$capitalizedInput12','$capitalizedInput13','$capitalizedInput14','$gross','$sibling','$fatherstat','$motherstat','$capitalizedInput15','$capitalizedInput16','$capitalizedInput17','$capitalizedInput18','$tax_img','$cor_img','$cog_img','$report_img','$brgclear_img','$moral_img','Applicants','SD') ";
+
+
+
+
+        $query = "INSERT INTO students (fname,mname,lname,birth,suffix,citizen,placeofbirth,phone,fk_university_id,email,yearlevel,fk_course_id,genaverage,civil_status,gender,intend,brgy,brgclear_img,moral_img,status) VALUES('$fname','$mname','$lname','$birth','$suffix','$citizen','$placeofbirth','$phone','$school','$email','$yearlevel','$course','$genaverage','$civil_status','$gender','$intend','$brgy','$brgclear_img','$moral_img','Applicants') ";
          $query_run = mysqli_query($con, $query);
          if($query_run){
-          move_uploaded_file($image_tmp_name5, $image_folder5,);
-          move_uploaded_file($image_tmp_name4, $image_folder4,);
-          move_uploaded_file($image_tmp_name3, $image_folder3,);
-          move_uploaded_file($image_tmp_name2, $image_folder2,);
+          // move_uploaded_file($image_tmp_name5, $image_folder5,);
+          // move_uploaded_file($image_tmp_name4, $image_folder4,);
+          // move_uploaded_file($image_tmp_name3, $image_folder3,);
+          // move_uploaded_file($image_tmp_name2, $image_folder2,);
           move_uploaded_file($image_tmp_name1, $image_folder1,);
           move_uploaded_file($image_tmp_name, $image_folder,);
 
@@ -456,6 +468,7 @@ if(isset($_POST['submit'])){
 <input id="fullname" type="text" name="mname" placeholder="Middle Name"  required /> 
 <!-- <label> Lastname: </label>   -->
 <input id="fullname" type="text" name="lname" placeholder="Last Name"  required/> 
+<input id="fullname" type="text" name="suffix" placeholder="Suffix"  /> 
 </div>
 
 
@@ -466,7 +479,7 @@ if(isset($_POST['submit'])){
 
 <div class="year"> 
 <input id="birthday" type="text" name="birth" placeholder="Birth Date" onfocus="(this.type='date')" onchange="calculateAge()" required />  
-<input id="age" type="text" min="1" max="10" name="age" placeholder="Age" required /> 
+
 </div>
 
 
@@ -521,10 +534,6 @@ if(isset($_POST['submit'])){
   <option value="Sta Rita">Sta Rita</option>
   <option value="Sto Rosario">Sto Rosario</option>
                 </select> 
-<!-- <label> Middlename: </label>  -->
-<input id="fullname" type="text" name="municipality" value="Santo Domingo"  required /> 
-<!-- <label> Lastname: </label>   -->
-<input id="fullname" type="text" name="province" value="Nueva Ecija"  required/> 
 </div>
 
 <!-- <div class="year" > 
@@ -566,9 +575,45 @@ if(isset($_POST['submit'])){
             <div class="form-section" id="section-2" style="display: none;">
                 <h2>Educational Information</h2>
                 <div> 
+
+
+
+<?php
+$sql = "SELECT * FROM university_tbl";
+$result = $con->query($sql);
+
+$sql2 = "SELECT * FROM course_tbl";
+$result2 = $con->query($sql2);
+
+
+// Check if the query was successful
+
+
+?>
  
-<input id="id" type="text" name="school" placeholder="School Name " required />
-<input id="id" type="text" name="schooladdr" placeholder="School Address " required />
+
+<select id="id" name="school" required>
+<option value="" disabled selected>School Name</option>
+
+                  
+                    <?php
+
+                    if ($result) {
+
+            // Loop through the results and output each name as an option
+            while ($row = $result->fetch_assoc()) {
+                echo "<option value='" . $row['university_id'] . "'>" . $row['university_name'] . "</option>";
+            }
+        }
+            ?>
+
+
+                   
+                   
+                </select>
+
+
+
 <input  type="text" name="email" placeholder="Email Address" required />
 <input  id="id"type="text" name="intend" placeholder="School Intended to Enroll in" required />
 </div>
@@ -589,33 +634,30 @@ if(isset($_POST['submit'])){
 </div> -->
 
 <div class="year">
-<select id="year1" name="course" required>
-                    <option value="" disabled selected>Course</option>
-                    <option value="Accountancy">Accountancy</option>
-                    <option value="Agriculture">Agriculture</option>
-                    <option value="Aeronautical Engineering">Aeronautical Engineering</option>
-                    <option value="Architecture">Architecture</option>
-                    <option value="Biology">Biology</option>
-                    <option value="BS in Nursing">BS in Nursing</option>
-                    <option value="BS in Computer Engineering">BS in Computer Engineering</option>
-                    <option value="BS in Electronics and Communications Engineering">BS in Electronics and Communications Engineering</option>
-                    <option value="BS in Information Technology">BS in Information Technology</option>
-                    <option value="BS in Marine Engineering">BS in Marine Engineering</option>
-                    <option value="BS in Pharmacy">BS in Pharmacy</option>
-                    <option value="BS in Physical Therapy">BS in Physical Therapy</option>
-                    <option value="BS in Environmental Science">BS in Environmental Science</option>
-                    <option value="BS in Mining Engineering">BS in Mining Engineering</option>
-                    <option value="Business">Business</option>
-                    <option value="Business Administration">Business Administration</option>
-                    <option value="Computer Science">Computer Science</option>
-                    <option value="Chemical Engineering">Chemical Engineering</option>
-                    <option value="Chemistry">Chemistry</option>
-                    <option value="Education">Education</option>
-                    <option value="Engineering">Engineering</option>
-                    <option value="Geodetic Engineering">Geodetic Engineering</option>
-                    <option value="Geology">Geology</option>
-                    <option value="Mechanical Engineering">Mechanical Engineering</option>
+
+    <select id="year1" name="course" required>
+<option value="" disabled selected>Course</option>
+
+                  
+                    <?php
+
+                    if ($result2) {
+
+            // Loop through the results and output each name as an option
+            while ($row = $result2->fetch_assoc()) {
+                echo "<option value='" . $row['Course_ID'] . "'>" . $row['Course'] . "</option>";
+            }
+        }
+            ?>
+
+
+                   
+                   
                 </select>
+
+
+
+
                 <select id="year1" name="yearlevel" required>
                     <option value="" disabled selected>Year Level</option>
                     <option value="Grade 9">1st Year</option>
@@ -641,13 +683,8 @@ if(isset($_POST['submit'])){
 <input id="year1" type="text" name="disability" placeholder="Type of Disability" required />                   
 </div> -->
 
-<div class="year">
-<select id="year1" name="school_type" required>
-<option value="" disabled selected>School Type</option>
-                    <option value="Public">Public</option>
-                    <option value="Private">Private</option>
-                    
-                </select>
+<!-- <div class="year">
+
                 <select id="year1" name="disability" required>
                     <option value="" disabled selected>Type of Disability</option>
                     <option value="N/A">N/A</option>
@@ -678,7 +715,7 @@ if(isset($_POST['submit'])){
                     <option value="Other">Other</option>
                 </select> 
  
-</div>
+</div> -->
 
 </div>
 
@@ -689,7 +726,7 @@ if(isset($_POST['submit'])){
                 <button class="next-btn" type="button" onclick="nextSection()">Next</button>
             </div>
 
-            <div class="form-section" id="section-2" style="display: none;">
+           <!--  <div class="form-section" id="section-2" style="display: none;">
             <h2>FAMILY BACKGROUND</h2>
                 <div class="row">
                     
@@ -734,7 +771,7 @@ if(isset($_POST['submit'])){
 <input id="year1" type="text" name="sibling" placeholder="No. of Siblings in the Family"  required/> 
 </div> -->
 
-<div class="year">
+<!-- <div class="year">
 <select id="year1" name="gross" required>
                     <option value="" disabled selected>Total Parent Gross Income</option>
                     <option value="10,000">10,000</option>
@@ -750,22 +787,22 @@ if(isset($_POST['submit'])){
 </div>
 
 
-</div>
+</div> -->
 
 
-                <button class="prev-btn" type="button" onclick="prevSection()">Previous</button>
+           <!--      <button class="prev-btn" type="button" onclick="prevSection()">Previous</button>
 
 
                 <button class="next-btn" type="button" onclick="nextSection()">Next</button>
             </div>
-
+ -->
             
 
             <div class="form-section" id="section-2" style="display: none;">
                 <h2>IMAGE REQUIREMENTS</h2>
                 <div class="multiple">
                 <div class="year">
-<strong><label>TAX EXEMPTION</label></strong>
+<!-- <strong><label>TAX EXEMPTION</label></strong>
 </div>
 <div>
 <input id="year1" type="file" name="tax_img" class="box" accept="image/jpg, image/jpeg, image/png">  
@@ -789,7 +826,7 @@ if(isset($_POST['submit'])){
 </div>
 <div>
 <input id="year1" type="file" name="report_img" class="box" accept="image/jpg, image/jpeg, image/png">  
-</div>
+</div> -->
 <div class="year">
 <strong><label>BARANGGAY CLEARANCE</label><strong>
 </div>
