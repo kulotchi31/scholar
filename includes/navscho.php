@@ -119,8 +119,13 @@ if(!empty($update_image)){
     <span><h4>Personal Information</h4></span></a>
 </li>
 
+
 <!-- Divider -->
 
+<li class="nav-item active" id="divider2">
+  <a class="nav-link" href="family_information.php">
+    <span><h4>Family Information</h4></span></a>
+</li>
 
 <!-- Heading -->
 
