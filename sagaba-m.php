@@ -59,7 +59,7 @@ Filter
                             ?>
                             <tbody>
                                 <?php 
-                                    $query = "SELECT * FROM students WHERE (gender = 'male' AND status = 'scholars' AND brgy = 'sagaba') ORDER BY id ASC";
+                                    $query = "SELECT students.*,course_tbl.*,university_tbl.* FROM students join course_tbl on fk_course_id=Course_ID join university_tbl on fk_university_id=university_id WHERE (gender = 'male' AND status = 'scholars' AND brgy = 'sagaba') ORDER BY id ASC";
                                     $query_run = mysqli_query($con, $query);
 
                                     if(mysqli_num_rows($query_run) > 0)
@@ -71,8 +71,8 @@ Filter
                                                 <td><?php echo $no ;?></td>
                                                 <td><?= $student['lname'], ', ' ,$student['fname'],', ',$student['mname'], '.'?></td>
                                                 <td><?= $student['birth']; ?></td>
-                                                <td><?= $student['school']; ?></td>
-                                                <td><?= $student['course']; ?></td>
+                                                <td><?= $student['university_name']; ?></td>
+                                                <td><?= $student['Course']; ?></td>
                                                 <td><?= $student['brgy']; ?></td>
                                                 <td><?= $student['status']; ?></td>
                                                 <td>

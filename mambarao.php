@@ -55,7 +55,7 @@ Filter
       <?php $no=1 ?>
          <tbody>
         <?php 
-           $query = "SELECT * FROM students WHERE (brgy = 'mambarao' AND status = 'scholars') ORDER BY id ASC";
+           $query = "SELECT students.*,course_tbl.*,university_tbl.* FROM students join course_tbl on fk_course_id=Course_ID join university_tbl on fk_university_id=university_id WHERE (brgy = 'mambarao' AND status = 'scholars') ORDER BY id ASC";
            $query_run = mysqli_query($con, $query);
 
            if(mysqli_num_rows($query_run) > 0)
@@ -66,8 +66,8 @@ Filter
                 <tr style="font-weight: normal; color: black">
                    <td><?= $student['lname'], ', ' ,$student['fname'],', ',$student['mname'], '.'?></td>
                    <td><?= $student['birth']; ?></td>
-                   <td><?= $student['school']; ?></td>
-                   <td><?= $student['course']; ?></td>
+                   <td><?= $student['university_name']; ?></td>
+                   <td><?= $student['Course']; ?></td>
                    <td><?= $student['brgy']; ?></td>
                    <td><?= $student['status']; ?></td>
                    <td>
