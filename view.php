@@ -223,7 +223,7 @@ document.location.href = 'pendingtab.php';
                                     <div class="mb-3">
                                         <h5><label>Age</label>
                                             <p class="form-control">
-                                                <strong><?= $age->format('%y');; ?>
+                                                <strong><?= $age->format('%y'); ?>
                                             </p>
                                     </div>
 

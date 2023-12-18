@@ -139,16 +139,57 @@ $select = "UPDATE students SET status = 'rejected' WHERE id = '$id' ";
                         <form action="" method="post">
 
                         <?php
-                        if(isset($_GET['id']))
-                        {
+                        $fatherstat = "";
+                        $fathername = "";
+                        $fatheraddress = "";
+                        $fatheroccup = "";
+                        $fathereducattain = "";
+                        $motherstat = "";
+                        $mothername = "";
+                        $motheraddress = "";
+                        $motheroccup = "";
+                        $mothereducattain = "";
+                        $gross = "";
+                        $sibling = "";
+                        if (isset($_GET['id'])) {
                             $student_id = mysqli_real_escape_string($con, $_GET['id']);
-                            $query = "SELECT students.*,course_tbl.*,university_tbl.* FROM students join course_tbl on fk_course_id=Course_ID join university_tbl on fk_university_id=university_id WHERE students.id = '$student_id' ORDER BY id ASC";
+                            $query = "SELECT * FROM students WHERE id='$student_id' ";
                             $query_run = mysqli_query($con, $query);
 
-                            if(mysqli_num_rows($query_run) > 0)
-                            {
+                            if (mysqli_num_rows($query_run) > 0) {
                                 $student = mysqli_fetch_array($query_run);
-                                ?>
+                                $birthDate = $student['birth'];
+                                $currentDate = date("Y-m-d");
+
+                                $age = date_diff(date_create($birthDate), date_create($currentDate));
+
+                                $select_school =  mysqli_query($con, "SELECT * FROM university_tbl WHERE university_id = '$student[fk_university_id]'");
+                                $resultUniv = mysqli_fetch_assoc($select_school);
+
+                                $select_course =  mysqli_query($con, "SELECT * FROM course_tbl WHERE Course_ID = '$student[fk_course_id]'");
+                                $resultCourse = mysqli_fetch_assoc($select_course);
+
+                                $select_family =  mysqli_query($con, "SELECT * FROM family_tbl WHERE fk_scholar_id = '$student[id]'");
+                                $familyresult = mysqli_fetch_assoc($select_family);
+                                $countrow = mysqli_num_rows($select_family);
+                                if ($countrow > 0) {
+                                    $fatherstat = "$familyresult[father_status]";
+                                    $fathername = "$familyresult[father_name]";
+                                    $fatheraddress = "$familyresult[father_address]";
+                                    $fatheroccup = "$familyresult[father_occupation]";
+                                    $fathereducattain = "$familyresult[father_education_attainment]";
+                                    $motherstat = "$familyresult[mother_status]";
+                                    $mothername = "$familyresult[mother_name]";
+                                    $motheraddress = "$familyresult[mother_address]";
+                                    $motheroccup = "$familyresult[mother_occupation]";
+                                    $mothereducattain = "$familyresult[mother_education_attainment]";
+                                    $gross = "$familyresult[parent_gross_income]";
+                                    $sibling = "$familyresult[number_of_siblings]";
+                                }
+
+                                $select_scholar =  mysqli_query($con, "SELECT * FROM disability_tbl WHERE fk_scholar_id = '$student[id]'");
+
+                        ?>
                                 <a href="home.php" class="btn btn-danger float-end">BACK</a>
                                 <h4><center> PERSONAL INFORMATION</center></h4>
                                 <strong>
@@ -173,7 +214,7 @@ $select = "UPDATE students SET status = 'rejected' WHERE id = '$id' ";
                                      <div class="mb-3">
                                         <h5><label>Age</label>
                                         <p class="form-control">
-                                        <strong> <?=$student['age'];?>
+                                        <strong> <?= $age->format('%y');?>
                                         </p>
                                      </div>
 
@@ -223,14 +264,14 @@ $select = "UPDATE students SET status = 'rejected' WHERE id = '$id' ";
                                     <div class="mb-3">
                                         <h5><label>School Name</label>
                                         <p class="form-control">
-                                        <strong> <?=$student['university_name'];?>
+                                        <strong> <?= $resultUniv['university_name']; ?>
                                         </p>
                                     </div>
 
                                     <div class="mb-3">
                                         <h5><label>School Address</label>
                                         <p class="form-control">
-                                        <strong> <?=$student['university_address'];?>
+                                        <strong> <?= $resultUniv['university_address']; ?>
                                         </p>
                                     </div>
 
@@ -250,9 +291,9 @@ $select = "UPDATE students SET status = 'rejected' WHERE id = '$id' ";
 
                                     <div class="mb-3">
                                         <h5><label>Course</label>
-                                        <p class="form-control">
-                                        <strong> <?=$student['Course'];?>
-                                        </p>
+                                            <p class="form-control">
+                                                <strong><?= $resultCourse['Course']; ?>
+                                            </p>
                                     </div>
 
                                     <div class="mb-3">
@@ -279,94 +320,102 @@ $select = "UPDATE students SET status = 'rejected' WHERE id = '$id' ";
                                     <div class="mb-3">
                                         <h5><label>School Type</label>
                                         <p class="form-control">
-                                        <strong><?=$student['type'];?>
+                                        <strong><?= $resultUniv['type']; ?>
                                         </p>
                                     </div>
 
                                     <div class="mb-3">
                                         <h5><label>Type of Disability</label>
-                                        <p class="form-control">
-                                        <strong> <?=$student['disability'];?>
-                                        </p>
+                                            <p class="form-control">
+                                                <?php
+
+                                                while ($resultscholar = mysqli_fetch_assoc($select_scholar)) {
+                                                    echo "<strong>
+                                                        
+                                                    
+                                                         $resultscholar[type_of_disability]<br></strong>";
+                                                }
+                                                ?>
+                                            </p>
                                     </div>
  
                                     <h4><center> FAMILY BACKGROUND</center></h4>
 
                                     <div class="mb-3">
                                         <h5><label>Father Status</label>
-                                        <p class="form-control">
-                                        <strong><?=$student['fatherstat'];?>
-                                        </p>
+                                            <p class="form-control">
+                                                <strong><?= $fatherstat; ?>
+                                            </p>
                                     </div>
                                     <div class="mb-3">
                                         <h5><label>Mother Status</label>
-                                        <p class="form-control">
-                                        <strong><?=$student['motherstat'];?>
-                                        </p>
+                                            <p class="form-control">
+                                                <strong><?= $motherstat; ?>
+                                            </p>
                                     </div>
 
                                     <div class="mb-3">
                                         <h5><label>Father Name</label>
-                                        <p class="form-control">
-                                        <strong> <?=$student['fathername'];?>
-                                        </p>
+                                            <p class="form-control">
+                                                <strong> <?= $fathername; ?>
+                                            </p>
                                     </div>
                                     <div class="mb-3">
                                         <h5><label>Mother Name</label>
-                                        <p class="form-control">
-                                        <strong><?=$student['mothername'];?>
-                                        </p>
+                                            <p class="form-control">
+                                                <strong><?= $mothername; ?>
+                                            </p>
                                     </div>
                                     <div class="mb-3">
                                         <h5><label>Father Address</label>
-                                        <p class="form-control">
-                                        <strong><?=$student['fatheraddress'];?>
-                                        </p>
+                                            <p class="form-control">
+                                                <strong> <?= $fatheraddress; ?>
+                                            </p>
                                     </div>
                                     <div class="mb-3">
                                         <h5><label>Mother Address</Address></label>
-                                        <p class="form-control">
-                                        <strong><?=$student['motheraddress'];?>
-                                        </p>
+                                            <p class="form-control">
+                                                <strong> <?= $motheraddress; ?>
+                                            </p>
                                     </div>
                                     <div class="mb-3">
                                         <h5><label>Father Occupation</label>
-                                        <p class="form-control">
-                                        <strong><?=$student['fatheroccup'];?>
-                                        </p>
+                                            <p class="form-control">
+                                                <strong><?= $fatheroccup; ?>
+                                            </p>
                                     </div>
                                     <div class="mb-3">
                                         <h5><label>Mother Occupation</label>
-                                        <p class="form-control">
-                                        <strong><?=$student['motheroccup'];?>
-                                        </p>
+                                            <p class="form-control">
+                                                <strong> <?= $motheroccup; ?>
+                                            </p>
                                     </div>
                                     <div class="mb-3">
                                         <h5><label>Father Educational Attainment</label>
-                                        <p class="form-control">
-                                        <strong><?=$student['fathereducattain'];?>
-                                        </p>
+                                            <p class="form-control">
+                                                <strong> <?= $fathereducattain; ?>
+                                            </p>
                                     </div>
                                     <div class="mb-3">
                                         <h5><label>Mother Educational Attainment</label>
-                                        <p class="form-control">
-                                        <strong><?=$student['mothereducattain'];?>
-                                        </p>
+                                            <p class="form-control">
+                                                <strong> <?= $mothereducattain; ?>
+                                            </p>
                                     </div>
-                                    
+
                                     <div class="mb-3">
                                         <h5><label>Gross</label>
-                                        <p class="form-control">
-                                        <strong><?=$student['gross'];?>
-                                        </p>
+                                            <p class="form-control">
+                                                <strong><?= $gross; ?>
+                                            </p>
                                     </div>
-                                    
-                                    
+
+
                                     <div class="mb-3">
                                         <h5><label>Number of Siblings</label>
-                                        <p class="form-control">
-                                        <strong><?=$student['sibling'];?>
-                                        </p>
+                                            <p class="form-control">
+                                                <strong><?= $sibling; ?>
+                                            </p>
                                     </div>
 
                                     <h4><center>Image Requirements</center></h4>
