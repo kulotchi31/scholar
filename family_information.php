@@ -158,223 +158,270 @@ if (isset($_SESSION['username'], $_SESSION['password'])) {
 ?>
 
 
-<?php
+    <?php
 
-$fatherstat = "";
-$fathername = "";
-$fatheraddress = "";
-$fatheroccup = "";
-$fathereducattain = "";
-$motherstat = "";
-$mothername = "";
-$motheraddress = "";
-$motheroccup = "";
-$mothereducattain = "";
-$gross = "";
-$sibling = "";
+    $fatherstat = "";
+    $fathername = "";
+    $fatheraddress = "";
+    $fatheroccup = "";
+    $fathereducattain = "";
+    $motherstat = "";
+    $mothername = "";
+    $motheraddress = "";
+    $motheroccup = "";
+    $mothereducattain = "";
+    $gross = "";
+    $sibling = "";
 
-$scholar_id = $_SESSION['scholarid'];
-$sql = "SELECT * FROM family_tbl WHERE fk_scholar_id = '$scholar_id'";
-$query = mysqli_query($con, $sql);
-$result = mysqli_fetch_assoc($result);
-$count = mysqli_num_rows($query);
-if ($count > 0) {
-    $fatherstat = "$result[father_status]";
-    $fathername = "$result[father_name]";
-    $fatheraddress = "$result[father_address]";
-    $fatheroccup = "$result[father_occupation]";
-    $fathereducattain = "$result[father_education_attainment]";
-    $motherstat = "$result[mother_status]";
-    $mothername = "$result[mother_name]";
-    $motheraddress = "$result[mother_address]";
-    $motheroccup = "$result[mother_occupation]";
-    $mothereducattain = "$result[mother_education_attainment]";
-    $gross = "$result[parent_gross_income]";
-    $sibling = "$result[number_of_siblings]";
+    $scholar_id = $_SESSION['scholarid'];
+    $sql = "SELECT * FROM family_tbl WHERE fk_scholar_id = '$scholar_id'";
+    $query = mysqli_query($con, $sql);
+    $familyresult = mysqli_fetch_assoc($query);
+    $count = mysqli_num_rows($query);
+    if ($count > 0) {
+        $fatherstat = "$familyresult[father_status]";
+        $fathername = "$familyresult[father_name]";
+        $fatheraddress = "$familyresult[father_address]";
+        $fatheroccup = "$familyresult[father_occupation]";
+        $fathereducattain = "$familyresult[father_education_attainment]";
+        $motherstat = "$familyresult[mother_status]";
+        $mothername = "$familyresult[mother_name]";
+        $motheraddress = "$familyresult[mother_address]";
+        $motheroccup = "$familyresult[mother_occupation]";
+        $mothereducattain = "$familyresult[mother_education_attainment]";
+        $gross = "$familyresult[parent_gross_income]";
+        $sibling = "$familyresult[number_of_siblings]";
+    }
+
+    if (isset($_POST['updateFamilyBackground'])) {
+        $fatherstat = $_POST['fatherstat'];
+        $fathername = $_POST['fathername'];
+        $fatheraddress = $_POST['fatheraddress'];
+        $fatheroccup = $_POST['fatheroccup'];
+        $fathereducattain = $_POST['fathereducattain'];
+        $motherstat = $_POST['motherstat'];
+        $mothername = $_POST['mothername'];
+        $motheraddress = $_POST['motheraddress'];
+        $motheroccup = $_POST['motheroccup'];
+        $mothereducattain = $_POST['mothereducattain'];
+        $gross = $_POST['gross'];
+        $sibling = $_POST['sibling'];
+
+        if($count > 0){
+            $sql = "UPDATE `family_tbl` SET `father_status`='$fatherstat', `mother_status`=' $motherstat',`father_name`='$fathername',
+            `mother_name`='$mothername',`father_address`='$fatheraddress',`mother_address`='$motheraddress',
+            `father_education_attainment`='$fathereducattain',`mother_education_attainment`='$mothereducattain',
+            `father_occupation`='$fatheroccup',`mother_occupation`='$motheroccup',`parent_gross_income`='$gross',`number_of_siblings`='$sibling' WHERE fk_scholar_id = '$scholar_id'";
+           $query = mysqli_query($con,$sql);
+           if($query){
+            echo '<script>
+            Swal.fire({
+                title: "SUCCESS",
+                text: "YOU UPDATED FAMILY BACKGROUND SUCCESFULY",
+                icon: "success"
+              });</script>
+            ';
+           }
+        }else{
+            $sql = "INSERT INTO `family_tbl`(`fk_scholar_id`, `father_status`, `mother_status`, `father_name`, 
+            `mother_name`, `father_address`, `mother_address`, `father_education_attainment`, `mother_education_attainment`, 
+            `father_occupation`, `mother_occupation`, `parent_gross_income`, `number_of_siblings`) VALUES ('$scholar_id','$fatherstat','$motherstat',
+            '$fathername','$mothername','$fatheraddress','$motheraddress','$fathereducattain','$mothereducattain','$fatheroccup','$motheroccup','$gross','$sibling')";
+            $query = mysqli_query($con,$sql);
+            if($query){
+                echo '<script>
+                Swal.fire({
+                    title: "SUCCESS",
+                    text: "YOU INSERTED FAMILY BACKGROUND SUCCESFULY",
+                    icon: "success"
+                  });</script>
+                ';
+        }
+    }
 }
 
 
 
-?>
+    ?>
 
 
-<!DOCTYPE html>
-<html lang="en">
+    <!DOCTYPE html>
+    <html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Edit Student Profile</title>
-</head>
+        <title>Edit Student Profile</title>
+    </head>
 
-<body>
+    <body>
 
-    <div class="container">
-        <form class="application-form" id="scholarshipForm" method="post">
-
-
-            <!-- <form class="application-form" id="scholarshipForm"> -->
+        <div class="container">
+            <form class="application-form" id="scholarshipForm" method="post">
 
 
-            <!-- <div class="col">
+                <!-- <form class="application-form" id="scholarshipForm"> -->
+
+
+                <!-- <div class="col">
             <label class="form-label">Username:</label>
             <input type="text" class="form-control" name="username" value="<?php echo $row['username'] ?>">
           </div> -->
 
-            <div class="container d-flex justify-content-center">
-                <form action="" method="post" style="width:50vw; min-width:300px;">
+                <div class="container d-flex justify-content-center">
+                    <form action="" method="post" style="width:50vw; min-width:300px;">
 
-                
 
-                    <div class="form-section" id="section-2" style="display: none;">
-                    <h2>FAMILY BACKGROUND</h2>
-                        <section>
-                            <div class="profile-box box-left">
 
-                                <div class="row mb-3" id="con2">
-                                
+                        <div class="form-section" id="section-2" style="display: none;">
+                            <h2>FAMILY BACKGROUND</h2>
+                            <section>
+                                <div class="profile-box box-left">
 
-                                <div class="mb-3 last" id="name2">
-                                    <label>Fathers Living</label>
+                                    <div class="row mb-3" id="con2">
 
-                                    <p>
-                                    <input type="text" class="form-control" name="fatherstat" value="<?php echo $fatherstat; ?>">
-                                    </p>
+
+                                        <div class="mb-3 last" id="name2">
+                                            <label>Fathers Living</label>
+
+                                            <p>
+                                                <input type="text" class="form-control" name="fatherstat" value="<?php echo $fatherstat; ?>">
+                                            </p>
+                                        </div>
+                                        <div class="mb-3 last" id="name2">
+                                            <label>Fathers Name</label>
+
+                                            <p>
+                                                <input type="text" class="form-control" name="fathername" value="<?php echo $fathername; ?>">
+                                            </p>
+                                        </div>
+                                        <div class="mb-3 last" id="name2">
+                                            <label>Fathers Address</label>
+
+                                            <p>
+                                                <input type="text" class="form-control" name="fatheraddress" value="<?php echo $fatheraddress; ?>">
+                                            </p>
+
+                                        </div>
+                                        <div class="mb-3 last" id="name2">
+                                            <label>Fathers Occupatio </label>
+
+                                            <p>
+                                                <input type="text" class="form-control" name="fatheroccup" value="<?php echo $fatheroccup; ?>">
+                                            </p>
+                                        </div>
+                                        <div class="mb-3 last" id="name2">
+                                            <label>Fathers Educational Attainment</label>
+
+                                            <p>
+                                                <input type="text" class="form-control" name="fathereducattain" value="<?php echo $fathereducattain; ?>">
+                                            </p>
+                                        </div>
+                                        <div class="mb-3 last" id="name2">
+                                            <label>Total Parent Gross Income</label>
+
+                                            <p>
+                                                <input type="text" class="form-control" name="gross" value="<?php echo $gross; ?>">
+                                            </p>
+                                        </div>
+                                    </div>
+
+
                                 </div>
-                                <div class="mb-3 last" id="name2">
-                                    <label>Fathers Name</label>
-
-                                    <p>
-                                    <input type="text" class="form-control" name="fathername" value="<?php echo $fathername; ?>">
-                                    </p>
-                                </div>
-                                <div class="mb-3 last" id="name2">
-                                    <label>Fathers Address</label>
-
-                                    <p>
-                                    <input type="text" class="form-control" name="fatheraddress" value="<?php echo $fatheraddress; ?>">
-                                    </p>
-
-                                </div>
-                                <div class="mb-3 last" id="name2">
-                                    <label>Fathers Occupatio </label>
-
-                                    <p>
-                                    <input type="text" class="form-control" name="fatheroccup" value="<?php echo $fatheroccup; ?>">
-                                    </p>
-                                </div>
-                                <div class="mb-3 last" id="name2">
-                                    <label>Fathers Educational Attainment</label>
-
-                                    <p>
-                                    <input type="text" class="form-control" name="fathereducattain" value="<?php echo $fathereducattain; ?>">
-                                    </p>
-                                </div>
-                                <div class="mb-3 last" id="name2">
-                                    <label>Total Parent Gross Income</label>
-
-                                    <p>
-                                    <input type="text" class="form-control" name="gross" value="<?php echo $gross; ?>">
-                                    </p>
-                                </div>
-                                </div>
-
-
-                            </div>
-                        </section>
+                            </section>
 
 
 
-                        <button class="prev-btn next" type="button" onclick="prevSection()">Previous</button>
+                            <button class="prev-btn next" type="button" onclick="prevSection()">Previous</button>
 
 
-                        <button class="next-btn next" type="button" onclick="nextSection()">Next</button>
-                    </div>
-
-                    <div class="form-section" id="section-2" style="display: none;">
-                        <h2>FAMILY BACKGROUND</h2>
-                        <section>
-                            <div class="profile-box box-left">
-
-
-                                <div class="row mb-3" id="con2">
-
-
-                                <div class="mb-3 last" id="name2">
-                                    <label>Mothers Living</label>
-
-                                    <p>
-                                    <input type="text" class="form-control" name="motherstat" value="<?php echo $motherstat; ?>">
-                                    </p>
-                                </div>
-                                <div class="mb-3 last" id="name2">
-                                    <label>Mothers Name</label>
-
-                                    <p>
-                                    <input type="text" class="form-control" name="mothername" value="<?php echo $mothername; ?>">
-                                    </p>
-                                </div>
-                                <div class="mb-3 last" id="name2">
-                                    <label>Mothers Address</label>
-
-                                    <p>
-                                    <input type="text" class="form-control" name="motheraddress" value="<?php echo $motheraddress; ?>">
-                                    </p>
-                                </div>
-                                <div class="mb-3 last" id="name2">
-                                    <label>Mothers Occupation</label>
-
-                                    <p>
-                                    <input type="text" class="form-control" name="motheroccup" value="<?php echo $motheroccup; ?>">
-                                    </p>
-                                </div>
-                                <div class="mb-3 last" id="name2">
-                                    <label>Mothers Educational Attainment</label>
-
-                                    <p>
-                                    <input type="text" class="form-control" name="mothereducattain" value="<?php echo $mothereducattain; ?>">
-                                    </p>
-                                </div>
-                                <div class="mb-3 last" id="name2">
-                                    <label>NO. of Siblings in The Family</label>
-
-                                    <p>
-                                    <input type="text" class="form-control" name="sibling" value="<?php echo $sibling; ?>">
-                                    </p>
-                                </div>
-                                </div>
-
-
-                            </div>
-                        </section>
-                        <div class="button" style="float: right; padding-top: 25px;">
-                            <button type="submit" class="btn btn-success" name="submit">Update</button>
+                            <button class="next-btn next" type="button" onclick="nextSection()">Next</button>
                         </div>
 
-                        <button class="prev-btn next" type="button" onclick="prevSection()">Previous</button>
+                        <div class="form-section" id="section-2" style="display: none;">
+                            <h2>FAMILY BACKGROUND</h2>
+                            <section>
+                                <div class="profile-box box-left">
 
 
-                        <!-- <button class="submit-btn" type="submit">Submit Application</button> -->
-                    </div>
+                                    <div class="row mb-3" id="con2">
 
 
-                    <!-- <div class="button">
-          <button type="submit" class="btn btn-success" name="submit">Update</button>
-          <button type="submit" class="btn btn-primary" name="scholar">Accept</button>
-          <a href="index.php" class="btn btn-danger">Cancel</a>
-        </div> -->
+                                        <div class="mb-3 last" id="name2">
+                                            <label>Mothers Living</label>
+
+                                            <p>
+                                                <input type="text" class="form-control" name="motherstat" value="<?php echo $motherstat; ?>">
+                                            </p>
+                                        </div>
+                                        <div class="mb-3 last" id="name2">
+                                            <label>Mothers Name</label>
+
+                                            <p>
+                                                <input type="text" class="form-control" name="mothername" value="<?php echo $mothername; ?>">
+                                            </p>
+                                        </div>
+                                        <div class="mb-3 last" id="name2">
+                                            <label>Mothers Address</label>
+
+                                            <p>
+                                                <input type="text" class="form-control" name="motheraddress" value="<?php echo $motheraddress; ?>">
+                                            </p>
+                                        </div>
+                                        <div class="mb-3 last" id="name2">
+                                            <label>Mothers Occupation</label>
+
+                                            <p>
+                                                <input type="text" class="form-control" name="motheroccup" value="<?php echo $motheroccup; ?>">
+                                            </p>
+                                        </div>
+                                        <div class="mb-3 last" id="name2">
+                                            <label>Mothers Educational Attainment</label>
+
+                                            <p>
+                                                <input type="text" class="form-control" name="mothereducattain" value="<?php echo $mothereducattain; ?>">
+                                            </p>
+                                        </div>
+                                        <div class="mb-3 last" id="name2">
+                                            <label>NO. of Siblings in The Family</label>
+
+                                            <p>
+                                                <input type="text" class="form-control" name="sibling" value="<?php echo $sibling; ?>">
+                                            </p>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                            </section>
+                            <div class="button" style="float: right; padding-top: 25px;">
+                                <button type="submit" class="btn btn-success" name="updateFamilyBackground">Update</button>
+                            </div>
+
+                            <button class="prev-btn next" type="button" onclick="prevSection()">Previous</button>
+
+
+                            <!-- <button class="submit-btn" type="submit">Submit Application</button> -->
+                        </div>
+
+
+                        <!-- <div class="button">
+                        <button type="submit" class="btn btn-success" name="submit">Update</button>
+                        <button type="submit" class="btn btn-primary" name="scholar">Accept</button>
+                        <a href="index.php" class="btn btn-danger">Cancel</a>
+                        </div> -->
 
 
 
-                </form>
-            </div>
-    </div>
+                    </form>
+                </div>
+        </div>
 
-    <!-- Bootstrap -->
-    <script src="script.js"></script>
-</body>
+        <!-- Bootstrap -->
+        <script src="script.js"></script>
+    </body>
 
-</html>
-<?php }?>
+    </html>
+<?php } ?>
