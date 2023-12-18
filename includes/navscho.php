@@ -137,8 +137,21 @@ if(!empty($update_image)){
 
 <li class="nav-item active" id="divider2">
   <a class="nav-link" href="imagereq.php">
-    <span><h4>Image Requirement</h4></span></a>
+    <span><h4>Image</h4></span></a>
 </li>
+
+
+<li class="nav-item active" id="divider2">
+  <a class="nav-link" href="requirements.php">
+    <span><h4>Requirements</h4></span></a>
+</li>
+
+
+<li class="nav-item active" id="divider2">
+  <a class="nav-link" href="reportcard.php">
+    <span><h4>Report Cards</h4></span></a>
+</li>
+
 
 
 
