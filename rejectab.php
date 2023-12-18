@@ -94,14 +94,21 @@ if(isset($_POST['scholar'])){
                                     {
                                         foreach($query_run as $student)
                                         {
+
+                                          $select_school =  mysqli_query($con, "SELECT * FROM university_tbl WHERE university_id = '$student[fk_university_id]'");
+                                          $resultUniv = mysqli_fetch_assoc($select_school);
+
+                                          $select_course =  mysqli_query($con, "SELECT * FROM course_tbl WHERE Course_ID = '$student[fk_course_id]'");
+                                          $resultCourse = mysqli_fetch_assoc($select_course);
+                                          
                                             ?>
                                             <tr>
                                                 
-                                                <td><?= $student['scholar_id']; ?></td>
+                                                <td><?= $student['id']; ?></td>
                                                 <td><?= $student['lname'], ', ' ,$student['fname'],', ',$student['mname'], '.'?></td>
                                                 <td><?= $student['birth']; ?></td>
-                                                <td><?= $student['school']; ?></td>
-                                                <td><?= $student['course']; ?></td>
+                                                <td><?= $resultUniv['university_name']; ?></td>
+                                                <td><?= $resultCourse['Course']; ?></td>
                                                 <td><?= $student['brgy']; ?></td>
  
                                                 <td>
