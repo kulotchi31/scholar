@@ -21,17 +21,22 @@ button{
 </style>
 
  <?php
-    $sql = "SELECT * FROM students WHERE username = '".$_SESSION['username']."' AND password = '".$_SESSION['password']."'";
+    $sql = "SELECT students.*,course_tbl.*,university_tbl.* FROM students join course_tbl on fk_course_id=Course_ID join university_tbl on fk_university_id=university_id WHERE id = '".$_SESSION['scholarid']."'";
     $result = mysqli_query($con, $sql);
     $row = mysqli_fetch_assoc($result);
     $birthdate = $row['birth'];
     $currentDate = date("Y-m-d");
 
+
+
+   $date = new DateTime($birthdate);
+ $now = new DateTime();
+
     $age = date_diff(date_create($birthdate), date_create($currentDate));
     ?>
 
 <?php
-      $select = mysqli_query($con, "SELECT * FROM `students` WHERE username = '".$_SESSION['username']."' AND password = '".$_SESSION['password']."'") or die('query failed');
+      $select = mysqli_query($con, "SELECT students.*,course_tbl.*,university_tbl.* FROM students join course_tbl on fk_course_id=Course_ID join university_tbl on fk_university_id=university_id WHERE id = '".$_SESSION['scholarid']."' ") or die('query failed');
       if(mysqli_num_rows($select) > 0){
          $fetch = mysqli_fetch_assoc($select);
       }
@@ -147,7 +152,7 @@ if ($specificValue === 'updated') {
     <td colspan=3>
     
  <center><B>Personal Information </B></center>
- <B>Age:</B> <?php echo $age->format('%y');?><br>
+ <B>Age:</B> <?php echo $age->y;?><br>
  <B>Sex:</B> <?=$row['gender'];?><br>
  <B>Citizenship:</B> <?=$row['citizen'];?><br>
  <B>Civil Status:</B> <?=$row['civil_status'];?><br>
@@ -159,39 +164,20 @@ if ($specificValue === 'updated') {
  <td colspan=3>
     
     <center><B>Educational Information </B></center>
-    <B>School Name:</B> <?=$row['school'];?><br>
-    <B>School Address:</B> <?=$row['schooladdr'];?><br>
+    <B>School Name:</B> <?=$row['university_name'];?><br>
+    <B>School Address:</B> <?=$row['university_address'];?><br>
     <B>School Intended to Enroll In:</B> <?=$row['intend'];?><br>
-    <B>Course:</B> <?=$row['course'];?><br>
-    <B>School Type:</B> <?=$row['school_type'];?><br>
+    <B>Course:</B> <?=$row['Course'];?><br>
+    <B>School Type:</B> <?=$row['type'];?><br>
     <B>Year Level:</B> <?=$row['yearlevel'];?><br>
     <B>General Average:</B> <?=$row['genaverage'];?><br>
-    <B>Type of Disability:</B> <?=$row['disability'];?>
+    
    </td>
 </td>
 </tr>
  <tr>
  
- <td colspan=3>
-    
-    <center><B>Family Background</B></center>
-    <B>Father Status:</B> <?=$row['fatherstat'];?><br>
-    <B>Father Name:</B> <?=$row['fathername'];?><br>
-    <B>Father Address:</B> <?=$row['fatheraddress'];?><br>
-    <B>Father Occupation:</B> <?=$row['fatheroccup'];?><br>
-    <B>Father Educational Attainment:</B> <?=$row['fathereducattain'];?><br>
-    <B>Mother Status:</B> <?=$row['motherstat'];?><br>
-    <B>Mother Name:</B> <?=$row['mothername'];?><br>
-    <B>Mother Address:</B> <?=$row['motheraddress'];?><br>
-    <B>Mother Occupation:</B> <?=$row['motheroccup'];?><br>
-    <B>Mother Educational Attainment:</B> <?=$row['mothereducattain'];?><br>
-    <B>Total Parent Gross Income :</B> <?=$row['gross'];?><br>
-    <B>Number of Siblings:</B> <?=$row['sibling'];?><br>
-   </td>
-    
 
-  
-</td>
 </tr>
 
 </table>

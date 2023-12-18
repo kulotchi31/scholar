@@ -167,12 +167,12 @@ if (isset($_POST["submit"])) {
   $fname = $_POST['fname'];
   $mname = $_POST['mname'];
   $lname = $_POST['lname'];
+  $suffix = $_POST['suffix'];
   $birth = $_POST['birth'];
   $phone = $_POST['phone'];
   $school = $_POST['school'];
   $citizen = $_POST['citizen'];
   $placeofbirth = $_POST['placeofbirth'];
-  $schooladdr = $_POST['schooladdr'];
   $email = $_POST['email'];
 
   $yearlevel = $_POST['yearlevel'];
@@ -180,19 +180,8 @@ if (isset($_POST["submit"])) {
   $genaverage = $_POST['genaverage'];
   $civil_status = $_POST['civil_status'];
   $gender = $_POST['gender'];
-  $school_type = $_POST['school_type'];
-  $fatheraddress =  $_POST['fatheraddress'];
-  $fathername = $_POST['fathername'];
-  $mothername = $_POST['mothername'];
-  $motheraddress = $_POST['motheraddress'];
-  $fatheroccup = $_POST['fatheroccup'];
-  $motheroccup = $_POST['motheroccup'];
-  $fathereducattain = $_POST['fathereducattain'];
-  $mothereducattain = $_POST['mothereducattain'];
-  $gross = $_POST['gross'];
-  $sibling = $_POST['sibling'];
-  $fatherstat = $_POST['fatherstat'];
-  $motherstat = $_POST['motherstat'];
+
+
   $intend = $_POST['intend'];
   $brgy = $_POST['brgy'];
 
@@ -200,7 +189,7 @@ if (isset($_POST["submit"])) {
 
 
 
-  $sql = "UPDATE `students` SET `fname`='$fname',`mname`='$mname',`lname`='$lname',`birth`='$birth',`phone`='$phone',`school`='$school',`citizen`='$citizen',`placeofbirth`='$placeofbirth',`schooladdr`='$schooladdr',`email`='$email',`yearlevel`='$yearlevel',`course`='$course',`genaverage`='$genaverage',`civil_status`='$civil_status',`gender`='$gender',`school_type`='$school_type',`fathername`='$fathername',`mothername`='$mothername',`motheraddress`='$motheraddress',`fatheraddress`='$fatheraddress',`fatheroccup`='$fatheroccup',`motheroccup`='$motheroccup',`fathereducattain`='$fathereducattain',`mothereducattain`='$mothereducattain',`gross`='$gross',`sibling`='$sibling',`fatherstat`='$fatherstat',`motherstat`='$motherstat',`intend`='$intend',`brgy`='$brgy' WHERE username = '" . $_SESSION['username'] . "' AND password = '" . $_SESSION['password'] . "'";
+  $sql = "UPDATE `students` SET `fname`='$fname',`mname`='$mname',`lname`='$lname',`suffix`='$suffix',`birth`='$birth',`phone`='$phone',`fk_university_id`='$school',`citizen`='$citizen',`placeofbirth`='$placeofbirth',`email`='$email',`yearlevel`='$yearlevel',`fk_course_id`='$course',`genaverage`='$genaverage',`civil_status`='$civil_status',`gender`='$gender',`intend`='$intend',`brgy`='$brgy' WHERE   id = '" . $_SESSION['scholarid'] . "'";
 
   $result = mysqli_query($con, $sql);
 
@@ -314,6 +303,14 @@ if (isset($_POST['scholar'])) {
 
                     <p>
                       <input type="text" class="form-control" name="mname" value="<?php echo $row['mname'] ?>">
+                    </p>
+                  </div>
+
+                      <div class="mb-3 last" id="name2">
+                    <label>Suffix</label>
+
+                    <p>
+                      <input type="text" class="form-control" name="suffix" value="<?php echo $row['suffix'] ?>">
                     </p>
                   </div>
 
@@ -437,6 +434,9 @@ $result2 = $con->query($sql2);
 
 
                   <div class="mb-3 last" id="name2">
+
+                           <label>School</label>
+
                      <select id="id" name="school" required>
 <option value="" disabled selected>School Name</option>
 
@@ -447,19 +447,24 @@ $result2 = $con->query($sql2);
 
             // Loop through the results and output each name as an option
             while ($row1 = $result->fetch_assoc()) {
-                if($row1["university_id"]==$row["fk_university_id"]){
+                if($row["university_id"]==$row1["fk_university_id"]){
 
-                   echo "<option selected value='" . $row['university_id'] . "'>" . $row['university_name'] . "</option>";
+
+                       echo "<option selected value='" . $row1['university_id'] . "'>" . $row1['university_name'] . "</option>";
                 }
                 else
                 {
 
-                    echo "<option  value='" . $row['university_id'] . "'>" . $row['university_name'] . "</option>";
+                    echo "<option  value='" . $row1['university_id'] . "'>" . $row1['university_name'] . "</option>";
                 }
+
+                
                
             }
         }
             ?>
+
+          </select>
 
 
                    
@@ -473,12 +478,41 @@ $result2 = $con->query($sql2);
                       <input type="text" class="form-control" name="intend" value="<?php echo $row['intend'] ?>">
                     </p>
                   </div>
+                  <br>
                   <div class="mb-3 last" id="name2">
                     <label>Course</label>
 
-                    <p>
-                      <input type="text" class="form-control" name="course" value="<?php echo $row['Course'] ?>">
-                    </p>
+                                        <select id="id" name="course" required>
+<option value="" disabled selected>Course</option>
+
+                  
+                    <?php
+
+                    if ($result2) {
+
+            // Loop through the results and output each name as an option
+            while ($row2 = $result2->fetch_assoc()) {
+                if($row2["Course_ID"]==$row["fk_course_id"]){
+
+                  echo "<option selected value='" . $row2['Course_ID'] . "'>" . $row2['Course'] . "</option>";
+                }
+                else
+                {
+
+                    echo "<option  value='" . $row2['Course_ID'] . "'>" . $row2['Course'] . "</option>";
+                }
+               
+            }
+        }
+            ?>
+
+          </select>
+
+
+
+
+
+                
                   </div>
                   <div class="mb-3 last" id="name2">
                     <label>Year Level</label>
@@ -523,14 +557,7 @@ $result2 = $con->query($sql2);
                     </p>
 
                   </div>
-                  <div class="mb-3 last" id="name2">
-                    <label>Type of School</label>
-
-                    <p>
-                      <input type="text" class="form-control" name="school_type" value="<?php echo $row['school_type'] ?>">
-                    </p>
-
-                  </div>
+          
                   
 
                 </div>
@@ -543,140 +570,14 @@ $result2 = $con->query($sql2);
             <button class="prev-btn next" type="button" onclick="prevSection()">Previous</button>
 
 
-            <button class="next-btn next" type="button" onclick="nextSection()">Next</button>
-          </div>
-
-          <div class="form-section" id="section-2" style="display: none;">
-            <h2>Educational Information</h2>
-            <section>
-              <div class="profile-box box-left">
-
-                <div class="row mb-3" id="con2">
-
-
-                  <div class="mb-3 last" id="name2">
-                    <label>Fathers Living</label>
-
-                    <p>
-                      <input type="text" class="form-control" name="fatherstat" value="<?php echo $row['fatherstat'] ?>">
-                    </p>
-                  </div>
-                  <div class="mb-3 last" id="name2">
-                    <label>Fathers Name</label>
-
-                    <p>
-                      <input type="text" class="form-control" name="fathername" value="<?php echo $row['fathername'] ?>">
-                    </p>
-                  </div>
-                  <div class="mb-3 last" id="name2">
-                    <label>Fathers Address</label>
-
-                    <p>
-                      <input type="text" class="form-control" name="fatheraddress" value="<?php echo $row['fatheraddress'] ?>">
-                    </p>
-
-                  </div>
-                  <div class="mb-3 last" id="name2">
-                    <label>Fathers Occupatio </label>
-
-                    <p>
-                      <input type="text" class="form-control" name="fatheroccup" value="<?php echo $row['fatheroccup'] ?>">
-                    </p>
-                  </div>
-                  <div class="mb-3 last" id="name2">
-                    <label>Fathers Educational Attainment</label>
-
-                    <p>
-                      <input type="text" class="form-control" name="fathereducattain" value="<?php echo $row['fathereducattain'] ?>">
-                    </p>
-                  </div>
-                  <div class="mb-3 last" id="name2">
-                    <label>Total Parent Gross Income</label>
-
-                    <p>
-                      <input type="text" class="form-control" name="gross" value="<?php echo $row['gross'] ?>">
-                    </p>
-                  </div>
-                </div>
-
-
-              </div>
-            </section>
-
-
-
-            <button class="prev-btn next" type="button" onclick="prevSection()">Previous</button>
-
-
-            <button class="next-btn next" type="button" onclick="nextSection()">Next</button>
-          </div>
-
-          <div class="form-section" id="section-2" style="display: none;">
-            <h2>FAMILY BACKGROUND</h2>
-            <section>
-              <div class="profile-box box-left">
-
-
-                <div class="row mb-3" id="con2">
-
-
-                  <div class="mb-3 last" id="name2">
-                    <label>Mothers Living</label>
-
-                    <p>
-                      <input type="text" class="form-control" name="motherstat" value="<?php echo $row['motherstat'] ?>">
-                    </p>
-                  </div>
-                  <div class="mb-3 last" id="name2">
-                    <label>Mothers Name</label>
-
-                    <p>
-                      <input type="text" class="form-control" name="mothername" value="<?php echo $row['mothername'] ?>">
-                    </p>
-                  </div>
-                  <div class="mb-3 last" id="name2">
-                    <label>Mothers Address</label>
-
-                    <p>
-                      <input type="text" class="form-control" name="motheraddress" value="<?php echo $row['motheraddress'] ?>">
-                    </p>
-                  </div>
-                  <div class="mb-3 last" id="name2">
-                    <label>Mothers Occupation</label>
-
-                    <p>
-                      <input type="text" class="form-control" name="motheroccup" value="<?php echo $row['motheroccup'] ?>">
-                    </p>
-                  </div>
-                  <div class="mb-3 last" id="name2">
-                    <label>Mothers Educational Attainment</label>
-
-                    <p>
-                      <input type="text" class="form-control" name="mothereducattain" value="<?php echo $row['mothereducattain'] ?>">
-                    </p>
-                  </div>
-                  <div class="mb-3 last" id="name2">
-                    <label>NO. of Siblings in The Family</label>
-
-                    <p>
-                      <input type="text" class="form-control" name="sibling" value="<?php echo $row['sibling'] ?>">
-                    </p>
-                  </div>
-                </div>
-
-
-              </div>
-            </section>
-            <div class="button" style="float: right; padding-top: 25px;">
+              <div class="button" style="float: right; padding-top: 25px;">
               <button type="submit" class="btn btn-success" name="submit">Update</button>
-              <a href="index.php" class="btn btn-danger">Cancel</a>
+              <a href="homescho.php" class="btn btn-danger">Cancel</a>
             </div>
 
-            <button class="prev-btn next" type="button" onclick="prevSection()">Previous</button>
-
-
-            <!-- <button class="submit-btn" type="submit">Submit Application</button> -->
           </div>
+
+     
 
 
           <!-- <div class="button">

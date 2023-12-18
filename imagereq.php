@@ -67,96 +67,9 @@ button{
                 
                 <section>
                 <center><h2>Image Requirements</h2></cente>
-                <div class="container">
+     
 
 
-                <div class="card" style="width: 18rem; margin-right: 30px; margin-top: 25px;" >
-  <div class="card-body">
-  
-
-  <?php
-        if(isset($_SESSION['prompt'])) {
-          showPrompt();
-        }
-        $query = "SELECT * FROM students WHERE username = '".$_SESSION['username']."' AND password = '".$_SESSION['password']."'";
-        if($result = mysqli_query($con, $query)) {
-        $row = mysqli_fetch_assoc($result);
-          echo '<img class="img1" src="upload/'.$row['tax_img'].'" width="250" height="250" style=" margin-bottom: 25px;" >';
-        } else {
-          die("Error with the query in the database");
-        }
-      ?>
-<strong><label>Tax Exemption</label></strong>   
-</div>
-</div>
-
-<div class="card" style="width: 18rem; margin-right: 30px; margin-top: 25px;" >
-  <div class="card-body">
-  
-
-  <?php
-        if(isset($_SESSION['prompt'])) {
-          showPrompt();
-        }
-        $query = "SELECT * FROM students WHERE username = '".$_SESSION['username']."' AND password = '".$_SESSION['password']."'";
-        if($result = mysqli_query($con, $query)) {
-        $row = mysqli_fetch_assoc($result);
-          echo '<img class="img1" src="upload/'.$row['cor_img'].'" width="250" height="250" style=" margin-bottom: 25px;" >';
-        } else {
-          die("Error with the query in the database");
-        }
-      ?>
-<strong><label>Certificate of Registration</label></strong>  
-</div>
-</div>
-
-</div>
-
-<div class="container">
-
-
-                <div class="card" style="width: 18rem; margin-right: 30px; margin-top: 25px;" >
-  <div class="card-body">
-  
-
-  <?php
-        if(isset($_SESSION['prompt'])) {
-          showPrompt();
-        }
-        $query = "SELECT * FROM students WHERE username = '".$_SESSION['username']."' AND password = '".$_SESSION['password']."'";
-        if($result = mysqli_query($con, $query)) {
-        $row = mysqli_fetch_assoc($result);
-          echo '<img class="img1" src="upload/'.$row['cog_img'].'" width="250" height="250" style=" margin-bottom: 25px;" >';
-        } else {
-          die("Error with the query in the database");
-        }
-      ?>
-<strong><label>Certificate of Grades</label></strong>   
-</div>
-</div>
-
-<div class="card" style="width: 18rem; margin-right: 30px; margin-top: 25px;" >
-  <div class="card-body">
-  
-
-  <?php
-        if(isset($_SESSION['prompt'])) {
-          showPrompt();
-        }
-        $query = "SELECT * FROM students WHERE username = '".$_SESSION['username']."' AND password = '".$_SESSION['password']."'";
-        if($result = mysqli_query($con, $query)) {
-        $row = mysqli_fetch_assoc($result);
-          echo '<img class="img1" src="upload/'.$row['report_img'].'" width="250" height="250" style=" margin-bottom: 25px;" >';
-        } else {
-          die("Error with the query in the database");
-        }
-      ?>
-<strong><label>Report of Grades</label></strong>
-  
-</div>
-</div>
-
-</div>
 
 <div class="container">
 

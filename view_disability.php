@@ -139,7 +139,7 @@ if (isset($_POST['delete'])) {
                                 if (mysqli_num_rows($query_run) > 0) {
                                     $disability = mysqli_fetch_array($query_run);
                             ?>
-                                    <a href="course.php" class="btn btn-danger float-end">BACK</a>
+                                    <a href="disability.php" class="btn btn-danger float-end">BACK</a>
                                     <h4 style="text-align: center;">DISABILITY</h4>
 
 
