@@ -423,32 +423,17 @@ document.location.href = 'pendingtab.php';
                                     </div>
 
                                     <h4>
-                                        <center>Image Requirements</center>
+                                        <center>  <a href="requirementsview.php?id=<?=$id; ?>">
+                                                REQUIREMENTS </a></center>
                                     </h4>
 
 
 
-                                    <div>
-                                        <h5><label>Tax Exemption</label>
-                                            <p class="form-control">
-                                                <img class="img1" src="upload/<?php echo $student['tax_img']; ?>" </p>
-                                    </div>
-
-                                    <div>
-                                        <h5><label>COR</label>
-                                            <p class="form-control">
-                                                <img class="img1" src="upload/<?php echo $student['cor_img']; ?>" </p>
-                                    </div>
-                                    <div>
-                                        <h5><label>COG</label>
-                                            <p class="form-control">
-                                                <img class="img1" src="upload/<?php echo $student['cog_img']; ?>" </p>
-                                    </div>
-                                    <div>
-                                        <h5><label>Report Card</label>
-                                            <p class="form-control">
-                                                <img class="img1" src="upload/<?php echo $student['report_img']; ?>" </p>
-                                    </div>
+                                    <h4>
+                                        <center>  <a href="reportcardview.php?id=<?=$id; ?>">
+                                                REPORT CARDS </a></center>
+                                    </h4>
+                                  
                                     <div>
                                         <h5><label>Baranggay Clearance</label>
                                             <p class="form-control">
